@@ -17,11 +17,21 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app })
 
+import { cats } from './builder.js'
+
 mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 
 mongoose.connection.once('open', () => {
     console.log('connected to mongodb')
 
-    app.listen({ port: 4000 }, () => console.log(`Server ready at http://localhost:4000${server.graphqlPath}`));
+    app.listen({ port: 4000 }, () => { 
+        console.log(`Server ready at http://localhost:4000${server.graphqlPath}`) 
+
+
+        // cats.forEach(cat => {
+        //     cat.save()
+        // })
+
+    });
 })
 
